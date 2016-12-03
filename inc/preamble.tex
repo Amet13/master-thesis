@@ -1,0 +1,203 @@
+%%% Преамбула %%%
+
+\usepackage{fontspec} % XeTeX
+\usepackage{xunicode} % Unicode для XeTeX
+\usepackage{xltxtra}  % Верхние и нижние индексы
+\usepackage{pdfpages} % Вставка PDF
+
+\usepackage{listings} % Оформление исходного кода
+\lstset{
+    basicstyle=\small\ttfamily, % Размер и тип шрифта
+    breaklines=true, % Перенос строк
+    tabsize=2, % Размер табуляции
+    literate={--}{{-{}-}}2 % Корректно отображать двойной дефис
+}
+
+% Шрифты, xelatex
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman} % Нормоконтроллеры хотят именно его
+\newfontfamily\cyrillicfont{Times New Roman}
+%\setsansfont{Liberation Sans} % Тут я его не использую, но если пригодится
+\setmonofont{FreeMono} % Моноширинный шрифт для оформления кода
+
+% Русский язык
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+
+\usepackage{amssymb,amsfonts,amsmath} % Математика
+\numberwithin{equation}{section} % Формула вида секция.номер
+
+\usepackage{enumerate} % Тонкая настройка списков
+\usepackage{indentfirst} % Красная строка после заголовка
+\usepackage{float} % Расширенное управление плавающими объектами
+\usepackage{multirow} % Сложные таблицы
+
+% Пути к каталогам с изображениями
+\usepackage{graphicx} % Вставка картинок и дополнений
+\graphicspath{{images/}{extra/}}
+
+% Формат подрисуночных записей
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+
+% Гиперссылки
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks, urlcolor={black}, % Все ссылки черного цвета, кликабельные
+    linkcolor={black}, citecolor={black}, filecolor={black},
+    pdfauthor={Амет Умеров},
+    pdftitle={НАЗВАНИЕ ТЕМЫ ДИПЛОМА}
+}
+
+% Оформление библиографии и подрисуночных записей через точку
+\makeatletter
+\renewcommand*{\@biblabel}[1]{\hfill#1.}
+\renewcommand*\l@section{\@dottedtocline{1}{1em}{1em}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}} % Формат рисунка секция.номер
+\renewcommand{\thetable}{\thesection.\arabic{table}} % Формат таблицы секция.номер
+\def\redeflsection{\def\l@section{\@dottedtocline{1}{0em}{10em}}}
+\makeatother
+
+\renewcommand{\baselinestretch}{1.4} % Полуторный межстрочный интервал
+\parindent 1.27cm % Абзацный отступ
+
+\sloppy             % Избавляемся от переполнений
+\hyphenpenalty=1000 % Частота переносов
+\clubpenalty=10000  % Запрещаем разрыв страницы после первой строки абзаца
+\widowpenalty=10000 % Запрещаем разрыв страницы после последней строки абзаца
+
+% Отступы у страниц
+\usepackage{geometry}
+\geometry{left=3cm}
+\geometry{right=1cm}
+\geometry{top=2cm}
+\geometry{bottom=2cm}
+
+% Списки
+\usepackage{enumitem}
+\setlist[enumerate,itemize]{leftmargin=12.7mm} % Отступы в списках
+
+\makeatletter
+    \AddEnumerateCounter{\asbuk}{\@asbuk}{м)}
+\makeatother
+\setlist{nolistsep} % Нет отступов между пунктами списка
+\renewcommand{\labelitemi}{--} % Маркет списка --
+\renewcommand{\labelenumi}{\asbuk{enumi})} % Список второго уровня
+\renewcommand{\labelenumii}{\arabic{enumii})} % Список третьего уровня
+
+% Содержание
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\hspace{0.38\textwidth}\MakeTextUppercase} % СОДЕРЖАНИЕ
+\renewcommand{\cftsecfont}{\hspace{0pt}}            % Имена секций в содержании не жирным шрифтом
+\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}} % Точки для секций в содержании
+\renewcommand\cftsecpagefont{\mdseries}             % Номера страниц не жирные
+\setcounter{tocdepth}{3}                            % Глубина оглавления, до subsubsection
+
+% Нумерация страниц справа сверху
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\textrm{\thepage}}
+\fancyheadoffset{0mm}
+\fancyfootoffset{0mm}
+\setlength{\headheight}{17pt}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{ 
+    \fancyhf{}
+    \rhead{\thepage}
+}
+
+% Формат подрисуночных надписей
+\RequirePackage{caption}
+\DeclareCaptionLabelSeparator{defffis}{ -- } % Разделитель
+\captionsetup[figure]{justification=centering, labelsep=defffis, format=plain} % Подпись рисунка по центру
+\captionsetup[table]{justification=raggedright, labelsep=defffis, format=plain, singlelinecheck=false} % Подпись таблицы слева
+\addto\captionsrussian{\renewcommand{\figurename}{Рис.}} % Имя фигуры
+
+% Пользовательские функции
+\newcommand{\addimg}[4]{ % Добавление одного рисунка
+    \begin{figure}
+        \centering
+        \includegraphics[width=#2\linewidth]{#1}
+        \caption{#3} \label{#4}
+    \end{figure}
+}
+\newcommand{\addimghere}[4]{ % Добавить рисунок непосредственно в это место
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=#2\linewidth]{#1}
+        \caption{#3} \label{#4}
+    \end{figure}
+}
+\newcommand{\addtwoimghere}[5]{ % Вставка двух рисунков
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=#2\linewidth]{#1}
+        \hfill
+        \includegraphics[width=#3\linewidth]{#2}
+        \caption{#4} \label{#5}
+    \end{figure}
+}
+\newcommand{\addimgapp}[2]{ % Это костыль для приложения Б
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{#1}
+        \caption*{#2}
+    \end{figure}
+}
+
+% Заголовки секций в оглавлении в верхнем регистре
+\usepackage{textcase}
+\makeatletter
+\let\oldcontentsline\contentsline
+\def\contentsline#1#2{
+    \expandafter\ifx\csname l@#1\endcsname\l@section
+        \expandafter\@firstoftwo
+    \else
+        \expandafter\@secondoftwo
+    \fi
+    {\oldcontentsline{#1}{\MakeTextUppercase{#2}}}
+    {\oldcontentsline{#1}{#2}}
+}
+\makeatother
+
+% Оформление заголовков
+\usepackage[compact,explicit]{titlesec}
+\titleformat{\section}{}{}{12.5mm}{\centering{\thesection\quad\MakeTextUppercase{#1}}\vspace{1.5em}}
+\titleformat{\subsection}[block]{\vspace{1em}}{}{12.5mm}{\thesubsection\quad#1\vspace{1em}}
+\titleformat{\subsubsection}[block]{\vspace{1em}\normalsize}{}{12.5mm}{\thesubsubsection\quad#1\vspace{1em}}
+\titleformat{\paragraph}[block]{\normalsize}{}{12.5mm}{\MakeTextUppercase{#1}}
+
+% Секции без номеров (введение, заключение...), вместо section*{}
+\newcommand{\anonsection}[1]{
+    \phantomsection % Корректный переход по ссылкам в содержании
+    \paragraph{\centerline{{#1}}\vspace{1.5em}}
+    \addcontentsline{toc}{section}{\uppercase{#1}}
+}
+
+% Секции для приложений
+\newcommand{\appsection}[1]{
+    \phantomsection
+    \paragraph{\centerline{{#1}}}
+    \addcontentsline{toc}{section}{\uppercase{#1}}
+}
+
+% Библиография: отступы и межстрочный интервал
+\makeatletter
+\renewenvironment{thebibliography}[1]
+    {\section*{\refname}
+        \list{\@biblabel{\@arabic\c@enumiv}}
+           {\settowidth\labelwidth{\@biblabel{#1}}
+            \leftmargin\labelsep
+            \itemindent 16.7mm
+            \@openbib@code
+            \usecounter{enumiv}
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}
+        }
+        \setlength{\itemsep}{0pt}
+    }
+\makeatother
+
+%\setcounter{page}{4} % Начало нумерации страниц
