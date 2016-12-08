@@ -139,13 +139,6 @@
         \caption{#4} \label{#5}
     \end{figure}
 }
-\newcommand{\addimgapp}[2]{ % Это костыль для приложения Б
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\linewidth]{#1}
-        \caption*{#2}
-    \end{figure}
-}
 
 % Заголовки секций в оглавлении в верхнем регистре
 \usepackage{textcase}
@@ -199,5 +192,7 @@
         \setlength{\itemsep}{0pt}
     }
 \makeatother
+
+% \usepackage{lastpage} % Подсчет количества страниц, если нужно
 
 %\setcounter{page}{4} % Начало нумерации страниц

@@ -34,20 +34,25 @@ ntp - только на винде позволяет устроить ддос
 + Linux kernel DIrty COW: CVE-2016-5195 http://www.opennet.ru/opennews/art.shtml?num=45354
 получить рута можно
 
-+ Xen CVE-2016-6258 http://www.opennet.ru/opennews/art.shtml?num=44855
+- Xen CVE-2016-6258 http://www.opennet.ru/opennews/art.shtml?num=44855
 выполнение произвольного кода на хост-ноде
+нет эксплоитов
 
-+ TCP CVE-2016-5696 http://www.opennet.ru/opennews/art.shtml?num=44945
+- TCP CVE-2016-5696 http://www.opennet.ru/opennews/art.shtml?num=44945
 возможность обрыва tcp-соединения и подстановки данных в трафик
+тяжело эксплуатировать
 
 - glibc CVE-2015-7547 http://opennet.ru/opennews/art.shtml?num=43886
 ее вряд ли можно эксплуатировать
 
-+ xen CVE-2016-3710 http://www.opennet.ru/opennews/art.shtml?num=44409
+- xen CVE-2016-3710 http://www.opennet.ru/opennews/art.shtml?num=44409
 работает только в hvm, выполнение кода на хост-ноде из гостевой
 
-+ linux kernel CVE-2016-8655 http://www.opennet.ru/opennews/art.shtml?num=45632
-тут возможно выйти за пределы lxc скорее всего
+- linux kernel CVE-2016-8655 http://www.opennet.ru/opennews/art.shtml?num=45632
+тут возможно выйти за пределы lxc скорее всего, но тут сложно, для этого нужен CAP\_NET\_RAW и sysctl kernel.unprivileged\_userns\_clone=1 плюс нет экслоита для LXC
+
+- LXC CVE-2016-8649 https://www.opennet.ru/opennews/art.shtml?num=45573
+эксплоит есть, но у меня не работает на 11 строчке
 
 ---
 
@@ -61,6 +66,9 @@ ntp - только на винде позволяет устроить ддос
 * если это что-то ядерное, то надо ребутать, так не пойдет, нужны патчи налету
 
 * использование встроенных механизмов защиты selinux/apparmor
+
+* если не удается исправить онлайн патчем, то либо ребут (что критично), либо онлайн миграция
+
 
 если связать это с опенсорсом, то
 
@@ -106,7 +114,7 @@ Received su prompt (Password: )
 Root password is:   dirtyCowFun
 Enjoy! :-)
 [dcow@master CVE-2016-5195]$ su root
-Password:
+Password: dirtyCowFun
 [root@master ~]# id
 uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
 
