@@ -169,6 +169,11 @@
     \addcontentsline{toc}{section}{\uppercase{#1}}
 }
 
+% Секция для аннотации (она не включается в содержание)
+\newcommand{\annotation}[1]{
+    \paragraph{\centerline{{#1}}\vspace{1.5em}}
+}
+
 % Секции для приложений
 \newcommand{\appsection}[1]{
     \phantomsection
@@ -195,4 +200,4 @@
 
 % \usepackage{lastpage} % Подсчет количества страниц, если нужно
 
-%\setcounter{page}{4} % Начало нумерации страниц
+\setcounter{page}{4} % Начало нумерации страниц
