@@ -52,7 +52,16 @@
 \input{inc/0-conclusion} % Заключение
 \input{inc/0-glossary} % Перечень сокращений и условных обозначений
 \input{inc/0-bibliography} % Библиографический список
-\input{inc/0-illustrations} % Список иллюстративного материала
+
+% Список иллюстративного материала
+\phantomsection
+\listoffigures
+\addcontentsline{toc}{section}{Список иллюстративного материала}
+\clearpage
+
+
+
+%\input{inc/0-illustrations} % Список иллюстративного материала
 
 % Приложения
 %\input{inc/a-app} % НАЗВАНИЕ ПРИЛОЖЕНИЯ 1

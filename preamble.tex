@@ -46,7 +46,7 @@
     colorlinks, urlcolor={black}, % Все ссылки черного цвета, кликабельные
     linkcolor={black}, citecolor={black}, filecolor={black},
     pdfauthor={Амет Умеров},
-    pdftitle={Исследование проблем безопасности облачных технологий}
+    pdftitle={Исследование безопасности облачных сред}
 }
 
 % Оформление библиографии и подрисуночных записей через точку
@@ -92,6 +92,10 @@
 \renewcommand\cftsecleader{\cftdotfill{\cftdotsep}} % Точки для секций в содержании
 \renewcommand\cftsecpagefont{\mdseries}             % Номера страниц не жирные
 \setcounter{tocdepth}{3}                            % Глубина оглавления, до subsubsection
+
+% Список иллюстративного материала
+\renewcommand{\cftloftitlefont}{\hspace{0.38\textwidth}\MakeTextUppercase}
+\renewcommand{\cftfigfont}{Рисунок }
 
 % Нумерация страниц справа сверху
 \usepackage{fancyhdr}
