@@ -94,8 +94,9 @@
 \setcounter{tocdepth}{3}                            % Глубина оглавления, до subsubsection
 
 % Список иллюстративного материала
-\renewcommand{\cftloftitlefont}{\hspace{0.38\textwidth}\MakeTextUppercase}
-\renewcommand{\cftfigfont}{Рисунок }
+\renewcommand{\cftloftitlefont}{\hspace{0.17\textwidth}\MakeTextUppercase}
+%\renewcommand{\cftfigfont}{Рисунок }
+\addto\captionsrussian{\renewcommand\listfigurename{Список иллюстративного материала}}
 
 % Нумерация страниц справа сверху
 \usepackage{fancyhdr}
