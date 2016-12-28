@@ -11,6 +11,7 @@ clean:
 	rm *.aux \
 	*.fdb_latexmk \
 	*.fls \
+	*.lof \
 	*.log \
 	*.out \
 	*.synctex.gz \
