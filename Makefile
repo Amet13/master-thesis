@@ -12,6 +12,7 @@ clean:
 	*.fdb_latexmk \
 	*.fls \
 	*.lof \
+	*.lot \
 	*.log \
 	*.out \
 	*.synctex.gz \
