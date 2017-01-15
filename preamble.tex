@@ -107,7 +107,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[R]{\textrm{\thepage}}
+\fancyhead[C]{\textrm{\thepage}}
 \fancyheadoffset{0mm}
 \fancyfootoffset{0mm}
 \setlength{\headheight}{17pt}
@@ -115,7 +115,7 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancypagestyle{plain}{
     \fancyhf{}
-    \rhead{\thepage}
+    \fancyhead[C]{\textrm{\thepage}}
 }
 
 % Формат подрисуночных надписей
@@ -175,20 +175,34 @@
 % Секции без номеров (введение, заключение...), вместо section*{}
 \newcommand{\anonsection}[1]{
     \phantomsection % Корректный переход по ссылкам в содержании
-    \paragraph{\centerline{{#1}}\vspace{1.5em}}
-    \addcontentsline{toc}{section}{\uppercase{#1}}
+    \paragraph{\centerline{{#1}}\vspace{1em}}
+    \addcontentsline{toc}{section}{#1}
 }
 
 % Секция для аннотации (она не включается в содержание)
 \newcommand{\annotation}[1]{
-    \paragraph{\centerline{{#1}}\vspace{1.5em}}
+    \paragraph{\centerline{{#1}}\vspace{1em}}
+}
+
+% Секция для списка иллюстративного материала
+\newcommand{\lof}{
+    \phantomsection
+    \listoffigures
+    \addcontentsline{toc}{section}{\listfigurename}
+}
+
+% Секция для списка табличного материала
+\newcommand{\lot}{
+    \phantomsection
+    \listoftables
+    \addcontentsline{toc}{section}{\listtablename}
 }
 
 % Секции для приложений
-\newcommand{\appsection}[1]{
+\newcommand{\appsection}[2]{
     \phantomsection
     \paragraph{\centerline{{#1}}}
-    \addcontentsline{toc}{section}{\uppercase{#1}}
+    \addcontentsline{toc}{section}{{#1} --- {#2}}
 }
 
 % Библиография: отступы и межстрочный интервал
