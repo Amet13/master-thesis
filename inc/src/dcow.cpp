@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------
+// --------------------------------------------------------------
 // Copyright (C) 2016  Gabriele Bonacini
 // https://github.com/gbonacini/CVE-2016-5195/blob/master/dcow.cpp
 // Edited 14.01.2017 for https://github.com/Amet13/master-thesis
@@ -17,7 +17,7 @@
 // Usage:
 // g++ -Wall -pedantic -std=c++11 -pthread -o dcow dcow.cpp -lutil
 // ./dcow
-// ---------------------------------------------------------------
+// --------------------------------------------------------------
 
 #include <iostream>
 #include <fstream>
