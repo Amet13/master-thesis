@@ -33,6 +33,7 @@ master-thesis
 ├── extra
 ├── images
 └── inc
+    └── src
 ```
 
 В корневом каталоге `.` находятся файлы `main.tex` и `preamble.tex`.
