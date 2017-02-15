@@ -20,12 +20,15 @@
 %\setsansfont{Liberation Sans} % Тут я его не использую, но если пригодится
 \setmonofont{FreeMono} % Моноширинный шрифт для оформления кода
 
+\usepackage{mathtools}
+\usepackage{unicode-math} % Не совместим с amsmath
+\setmathfont{XITS Math} % Шрифт для формул: https://github.com/khaledhosny/xits-math
+\numberwithin{equation}{section} % Формула вида секция.номер
+
 % Русский язык
 \usepackage{polyglossia}
 \setdefaultlanguage{russian}
 
-\usepackage{amssymb,amsfonts,amsmath} % Математика
-\numberwithin{equation}{section} % Формула вида секция.номер
 
 \usepackage{enumerate} % Тонкая настройка списков
 \usepackage{indentfirst} % Красная строка после заголовка
