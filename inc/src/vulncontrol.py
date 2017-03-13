@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# https://github.com/Amet13/vulncontrol
 
 from sys import exit
 from datetime import datetime
@@ -11,6 +10,7 @@ from json import loads
 import argparse
 
 __author__ = 'Amet13'
+
 today = datetime.now().strftime('%Y-%m-%d')
 
 # Arguments parsing
@@ -18,6 +18,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-d', default=today, dest='DATE')
 parser.add_argument('-m', default='0', dest='MINCVSS')
 parser.add_argument('-t', default='', dest='TOKENID', nargs=2)
+
 namespace = parser.parse_args()
 
 try:
@@ -36,14 +37,12 @@ month = date.split('-')[1]
 turl = 'https://api.telegram.org/bot'
 tfull = '{0}{1}/sendMessage'.format(turl, token)
 
-# Array for product IDs
 ids = []
-# Array for results
 cves = []
-# Array for Telegram results
 tcves = []
 # Maximum rows for one product
-numrows = 10
+numrows = 30
+
 feedlink = 'https://www.cvedetails.com/json-feed.php'
 source = open('products.txt', 'r')
 
@@ -54,6 +53,7 @@ for line in source:
         path = parsed[2]
         pathlist = path.split('/')
         ids.append(pathlist[2])
+
 source.close()
 
 # Get JSON for out products by date
@@ -61,8 +61,8 @@ try:
     for x in ids:
         # Link example:
         # https://www.cvedetails.com/json-feed.php?product_id=47&year=2017&month=02
-        link = '{0}?product_id={1}&year={2}&month={3}&cvssscoremin={4}' \
-            .format(feedlink, x, year, month, mincvss)
+        link = '{0}?product_id={1}&month={2}&year={3}&cvssscoremin={4}&numrows={5}' \
+            .format(feedlink, x, month, year, mincvss, numrows)
 
         # Going to URL and get JSON
         getjson = urlopen(link)
