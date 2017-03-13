@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# https://github.com/Amet13/vulncontrol
 
 from sys import exit
 from datetime import datetime
