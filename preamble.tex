@@ -204,11 +204,18 @@
     \addcontentsline{toc}{section}{\listtablename}
 }
 
+% Секции для приложений вида "Приложение А --- Имя приложения"
+%\newcommand{\appsection}[2]{
+%    \phantomsection
+%    \paragraph{\centerline{{#1}}}
+%    \addcontentsline{toc}{section}{{#1} --- {#2}}
+%}
+
 % Секции для приложений
-\newcommand{\appsection}[2]{
+\newcommand{\appsection}[1]{
     \phantomsection
     \paragraph{\centerline{{#1}}}
-    \addcontentsline{toc}{section}{{#1} --- {#2}}
+    \addcontentsline{toc}{section}{{#1}}
 }
 
 % Библиография: отступы и межстрочный интервал
