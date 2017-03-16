@@ -87,7 +87,7 @@
     \AddEnumerateCounter{\asbuk}{\@asbuk}{м)}
 \makeatother
 \setlist{nolistsep} % Нет отступов между пунктами списка
-\renewcommand{\labelitemi}{--} % Маркет списка --
+\renewcommand{\labelitemi}{--} % Маркер списка --
 \renewcommand{\labelenumi}{\asbuk{enumi})} % Список второго уровня
 \renewcommand{\labelenumii}{\arabic{enumii})} % Список третьего уровня
 
@@ -228,5 +228,5 @@
     }
 \makeatother
 
-% \usepackage{lastpage} % Подсчет количества страниц, если нужно
+\usepackage{lastpage} % Подсчет количества страниц, если нужно
 \setcounter{page}{4} % Начало нумерации страниц
