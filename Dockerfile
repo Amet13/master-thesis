@@ -16,4 +16,3 @@ RUN git clone --recursive https://github.com/Amet13/master-thesis && \
 
 RUN cd /master-thesis/ && \
 	make build
-
