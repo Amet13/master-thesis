@@ -1,0 +1,3 @@
+[submodule "vulncontrol"]
+	path = vulncontrol
+	url = https://github.com/Amet13/vulncontrol
