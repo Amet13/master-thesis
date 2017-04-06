@@ -52,11 +52,20 @@ master-thesis
 
 Работа с LaTeX
 --------------
-Как установить LaTeX: http://blog.amet13.name/2014/06/latex.html
+Как установить нужные пакеты LaTeX в Ubuntu/Mint:
+```bash
+sudo apt install texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyrillic latexmk texlive-fonts-extra texlive-math-extra
+```
+
+Для работы понадобятся шрифты Times New Roman и XITS-math:
+```bash
+apt install ttf-mscorefonts-installer
+wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/xits-math.otf && fc-cache -f -v
+```
 
 Пример компиляции проекта с помощью Makefile:
 ```bash
-git clone https://github.com/Amet13/master-thesis
+git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
 make
 ```
