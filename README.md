@@ -24,10 +24,10 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 * бланки задания, пояснительной записки
 * доклад, представляемый на защите диплома
 * `Makefile` для компиляции и сборки проекта
+* `Dockerfile` для сборки проекта в изолированном окружении
 
 Структура исходников
 --------------------
-Структура каталогов:
 ```
 .
 ├── images
@@ -35,11 +35,12 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 └── vulncontrol
 ```
 
-В корневом каталоге находятся файлы `main.tex`, `preamble.tex`, `Makefile`, `master-thesis.pdf`.
-В `preamble.tex` задается преамбула.
-В `main.tex` подключаются все остальные файлы.
-С помощью `Makefile` можно собрать проект.
-Файл `master-thesis.pdf` является результатом компиляции проекта.
+В корневом каталоге находятся файлы `main.tex`, `preamble.tex`, `Makefile`, `Dockerfile`, `master-thesis.pdf`.
+* в `preamble.tex` задается преамбула
+* в `main.tex` подключаются все остальные файлы
+* с помощью `Makefile` можно собрать проект
+* с помощью `Dockerfile` можно собрать проект в docker-контейнере без установки LaTeX на локальный компьютер
+* файл `master-thesis.pdf` является результатом компиляции проекта
 
 В каталоге `images/` находятся рисунки и схемы.
 
@@ -59,8 +60,8 @@ sudo apt install texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyr
 
 Для работы понадобятся шрифты Times New Roman и XITS-math:
 ```bash
-apt install ttf-mscorefonts-installer
-wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/xits-math.otf && fc-cache -f -v
+sudo apt install ttf-mscorefonts-installer
+sudo wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/xits-math.otf && sudo fc-cache -f -v
 ```
 
 Пример компиляции проекта с помощью Makefile:

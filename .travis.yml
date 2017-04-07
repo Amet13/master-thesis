@@ -1,5 +1,19 @@
+language: generic
+
 services:
   - docker
 
+env:
+  - DOCKER_BUILD_DIR=/master-thesis
+  - IMAGE=docker-latex
+  - COMMAND="make build && make clean"
+
 script:
-  - docker build -t master-thesis .
+  - docker build -t $IMAGE .
+  - docker run -ti -v $TRAVIS_BUILD_DIR:$DOCKER_BUILD_DIR:Z $IMAGE $COMMAND
+
+deploy:
+  provider: releases
+  api_key: $TOKEN
+  file: master-thesis.pdf
+  skip-cleanup: true
