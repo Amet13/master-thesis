@@ -5,7 +5,6 @@ services:
 
 script:
   - make docker
-  - make clean
 
 deploy:
   provider: releases
