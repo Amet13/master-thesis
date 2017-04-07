@@ -83,8 +83,7 @@ Docker уже должен быть установлен на сервере и�
 ```
 git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
-docker build -t master-thesis .
-docker run -ti -v ../master-thesis:/master-thesis:Z master-thesis bash -c "make build && make clean"
+make docker
 ```
 
 Если же сборка прошла нормально, то в каталоге репозитория создасться новый файл `master-thesis.pdf`.

@@ -3,12 +3,9 @@ language: generic
 services:
   - docker
 
-env:
-  - DOCKER_BUILD_DIR=/master-thesis IMAGE=docker-latex COMMAND="bash -c 'make build && make clean'"
-
 script:
-  - docker build -t $IMAGE .
-  - docker run -ti -v $TRAVIS_BUILD_DIR:$DOCKER_BUILD_DIR:Z $IMAGE $COMMAND
+  - make docker
+  - make clean
 
 deploy:
   provider: releases

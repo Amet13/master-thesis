@@ -17,3 +17,11 @@ clean:
 	*.out \
 	*.synctex.gz \
 	*.toc
+
+IMAGE=docker-latex
+PROJECT_DIR=master-thesis
+DOCKER_DIR=master-thesis
+
+docker:
+	docker build -t docker-latex .
+	docker run -ti -v ../$PROJECT_DIR:/$DOCKER_DIR:Z $IMAGE bash -c "make build && make clean"
