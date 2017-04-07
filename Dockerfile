@@ -8,7 +8,7 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu/ trusty multiverse" | tee -a /etc
     echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
 
 RUN apt update && \
-    apt install -y wget make apt-transport-https && \
+    apt install -y wget git make apt-transport-https && \
     apt install -y texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyrillic latexmk texlive-fonts-extra texlive-math-extra
 
 RUN apt install -y --reinstall ttf-mscorefonts-installer
