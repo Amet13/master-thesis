@@ -11,3 +11,5 @@ deploy:
   api_key: $TOKEN
   file: master-thesis.pdf
   skip-cleanup: true
+  on:
+    tags: true
