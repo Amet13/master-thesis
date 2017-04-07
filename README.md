@@ -68,7 +68,7 @@ sudo wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-
 ```bash
 git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
-make
+make || make build
 ```
 
 Пример очистки сборочных файлов после компиляции (кроме PDF):
