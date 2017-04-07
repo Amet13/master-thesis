@@ -76,6 +76,19 @@ make || make build
 make clean
 ```
 
+Docker
+------
+Проект можно собрать в Docker, в таком случае не придется устанавливать LaTeX на локальную машину.
+Docker уже должен быть установлен на сервере или локальной машине.
+```
+git clone --recursive https://github.com/Amet13/master-thesis
+cd master-thesis/
+docker build -t master-thesis .
+docker run -ti -v ../master-thesis:/master-thesis:Z master-thesis bash -c "make build && make clean"
+```
+
+Если же сборка прошла нормально, то в каталоге репозитория создасться новый файл `master-thesis.pdf`.
+
 Лицензия
 --------
 [![CC BY SA](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/deed.ru)
