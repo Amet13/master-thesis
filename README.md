@@ -42,6 +42,8 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 * с помощью `Dockerfile` можно собрать проект в docker-контейнере без установки LaTeX на локальный компьютер
 * файл `master-thesis.pdf` является результатом компиляции проекта
 
+Файлы `.gitmodules` и `.travis.yml` нужны для сборки git-проекта в окружении TravisCI.
+
 В каталоге `images/` находятся рисунки и схемы.
 
 В каталоге `inc/` находятся файлы, которые подключаются к `main.tex`:
