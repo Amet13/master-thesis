@@ -21,8 +21,8 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 * отдельные секции для аннотации, приложений
 * автоматически генерируемый список иллюстративного и табличного материала
 * ссылки на перечень сокращений и условных обозначений
-* бланки задания, пояснительной записки
-* доклад, представляемый на защите диплома
+<!-- * бланки задания, пояснительной записки
+* доклад, представляемый на защите диплома -->
 * `Makefile` для компиляции и сборки проекта
 * `Dockerfile` для сборки проекта в изолированном окружении
 
@@ -70,7 +70,7 @@ sudo wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-
 ```bash
 git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
-make || make build
+make
 ```
 
 Пример очистки сборочных файлов после компиляции (кроме PDF):

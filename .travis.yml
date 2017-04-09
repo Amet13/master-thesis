@@ -8,6 +8,8 @@ script:
 
 deploy:
   provider: releases
+  # https://github.com/settings/tokens
+  # Add variable TOKEN in TravisCI settings
   api_key: $TOKEN
   file: master-thesis.pdf
   skip-cleanup: true
