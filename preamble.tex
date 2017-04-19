@@ -8,11 +8,11 @@
 \usepackage{listings} % Оформление исходного кода
 \lstset{
     basicstyle=\small\ttfamily, % Размер и тип шрифта
-    breaklines=true, % Перенос строк
-    tabsize=2, % Размер табуляции
-    frame=single, % Рамка
-    literate={--}{{-{}-}}2, % Корректно отображать двойной дефис
-    literate={---}{{-{}-{}-}}3 % Корректно отображать тройной дефис
+    breaklines=true,            % Перенос строк
+    tabsize=2,                  % Размер табуляции
+    frame=single,               % Рамка
+    literate={--}{{-{}-}}2,     % Корректно отображать двойной дефис
+    literate={---}{{-{}-{}-}}3  % Корректно отображать тройной дефис
 }
 
 % Шрифты, xelatex
@@ -25,7 +25,7 @@
 % Формулы
 \usepackage{mathtools}
 \usepackage{unicode-math} % Не совместим с amsmath
-\setmathfont{XITS Math} % Шрифт для формул: https://github.com/khaledhosny/xits-math
+\setmathfont{XITS Math}   % Шрифт для формул: https://github.com/khaledhosny/xits-math
 \numberwithin{equation}{section} % Формула вида секция.номер
 
 % Русский язык
@@ -33,10 +33,10 @@
 \setdefaultlanguage{russian}
 
 % Абзацы и списки
-\usepackage{enumerate} % Тонкая настройка списков
+\usepackage{enumerate}   % Тонкая настройка списков
 \usepackage{indentfirst} % Красная строка после заголовка
-\usepackage{float} % Расширенное управление плавающими объектами
-\usepackage{multirow} % Сложные таблицы
+\usepackage{float}       % Расширенное управление плавающими объектами
+\usepackage{multirow}    % Сложные таблицы
 
 % Пути к каталогам с изображениями
 \usepackage{graphicx} % Вставка картинок и дополнений
@@ -60,7 +60,7 @@
 \renewcommand*{\@biblabel}[1]{\hfill#1.}
 \renewcommand*\l@section{\@dottedtocline{1}{1em}{1em}}
 \renewcommand{\thefigure}{\thesection.\arabic{figure}} % Формат рисунка секция.номер
-\renewcommand{\thetable}{\thesection.\arabic{table}} % Формат таблицы секция.номер
+\renewcommand{\thetable}{\thesection.\arabic{table}}   % Формат таблицы секция.номер
 \def\redeflsection{\def\l@section{\@dottedtocline{1}{0em}{10em}}}
 \makeatother
 
@@ -86,9 +86,9 @@
 \makeatletter
     \AddEnumerateCounter{\asbuk}{\@asbuk}{м)}
 \makeatother
-\setlist{nolistsep} % Нет отступов между пунктами списка
-\renewcommand{\labelitemi}{--} % Маркер списка --
-\renewcommand{\labelenumi}{\asbuk{enumi})} % Список второго уровня
+\setlist{nolistsep}                           % Нет отступов между пунктами списка
+\renewcommand{\labelitemi}{--}                % Маркер списка --
+\renewcommand{\labelenumi}{\asbuk{enumi})}    % Список второго уровня
 \renewcommand{\labelenumii}{\arabic{enumii})} % Список третьего уровня
 
 % Содержание
@@ -229,4 +229,4 @@
 \makeatother
 
 \usepackage{lastpage} % Подсчет количества страниц
-\setcounter{page}{4} % Начало нумерации страниц
+\setcounter{page}{4}  % Начало нумерации страниц

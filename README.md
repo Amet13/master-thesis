@@ -4,7 +4,8 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 
 Особенности
 -----------
-* использование XeLaTeX, основной шрифт Times New Roman, 14pt, полуторный межстрочный интервал, шрифт для формул XITS Math
+* использование XeLaTeX, основной шрифт Times New Roman, 14pt, полуторный межстрочный интервал
+* шрифт для формул XITS Math, шрифт для презентации PT Sans
 * подрисуночные и подтабличные записи в формате `номерСекции.номерРисунка`
 * нумерация страниц посередине сверху
 * возможность указания начала нумерации страниц
@@ -21,6 +22,7 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 * отдельные секции для аннотации, приложений
 * автоматически генерируемый список иллюстративного и табличного материала
 * ссылки на перечень сокращений и условных обозначений
+* слайды презентации
 * `Makefile` для компиляции и сборки проекта
 * `Dockerfile` для сборки проекта в изолированном окружении
 
@@ -30,17 +32,19 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 .
 ├── images
 ├── inc
+├── presentation
+│   └── images
 └── vulncontrol
 ```
 
-В корневом каталоге находятся файлы `main.tex`, `preamble.tex`, `Makefile`, `Dockerfile`, `master-thesis.pdf`.
-* в `preamble.tex` задается преамбула
+В корневом каталоге находятся файлы `Dockerfile`, `main.tex`, `Makefile`, `master-thesis.pdf`, `preamble.tex`, `README.md`, `.gitmodules`, `.travis.yml`:
+* с помощью `Dockerfile` можно собрать проект в docker-контейнере без установки LaTeX на локальный компьютер
 * в `main.tex` подключаются все остальные файлы
 * с помощью `Makefile` можно собрать проект
-* с помощью `Dockerfile` можно собрать проект в docker-контейнере без установки LaTeX на локальный компьютер
 * файл `master-thesis.pdf` является результатом компиляции проекта
-
-Файлы `.gitmodules` и `.travis.yml` нужны для сборки git-проекта в окружении TravisCI.
+* в `preamble.tex` задается преамбула
+* файл `.gitmodules` подключает к проекту репозиторий `vulncontrol`
+* файл `.travis.yml` необходим для сборки git-проекта в окружении TravisCI
 
 В каталоге `images/` находятся рисунки и схемы.
 
@@ -49,13 +53,21 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 * файлы формата `[1-9]-*.tex` являются нумерованными секциями (например постановка задчи, обзор литературных источников и т.д)
 * файлы формата `[a-z]-app.tex` являются файлами приложений
 
-Каталог `vulncontrol` является ссылкой на репозиторий, содержащий исходный код скрипта, используемого в ВКР.
+В каталоге `presentation/` находятся файлы необходимые для сборки слайдов презентации:
+* `beamerthemeMasterThesis.sty` является файлом стиля презентации
+* `main.tex` является преамбулой и "костяком" проекта
+* `Makefile` необходим для сборки
+* `slides.tex` является файлом, содержащим текст презентации
+* `presentation.pdf` является результатом компиляции слайдов презентации
+* каталог `images/` содержит изображения, используемые в презентации
+
+Каталог `vulncontrol/` является ссылкой на репозиторий, содержащий исходный код скрипта, используемого в ВКР.
 
 Работа с LaTeX
 --------------
 Как установить нужные пакеты LaTeX в Ubuntu/Mint:
 ```bash
-sudo apt install texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyrillic latexmk texlive-fonts-extra texlive-math-extra
+sudo apt install texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyrillic latexmk texlive-fonts-extra texlive-math-extra latex-beamer
 ```
 
 Для работы понадобятся шрифты Times New Roman и XITS-math:
@@ -76,17 +88,22 @@ make
 make clean
 ```
 
+Пример сборки слайдов презентации:
+```bash
+make pres
+```
+
 Docker
 ------
 Проект можно собрать в Docker, в таком случае не придется устанавливать LaTeX на локальную машину.
-Docker уже должен быть установлен на сервере или локальной машине.
+Docker уже должен быть установлен на сервере или локальной машине:
 ```
 git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
 make docker
 ```
 
-Если же сборка прошла нормально, то в каталоге репозитория будет создан или заменен файл `master-thesis.pdf`.
+Если же сборка прошла нормально, то в каталоге репозитория будет создан или заменен файл `master-thesis.pdf`, а в каталоге `presentation/` создан или заменен файл `presentation.pdf`.
 
 Лицензия
 --------
