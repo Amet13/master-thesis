@@ -11,5 +11,6 @@ deploy:
   # https://github.com/settings/tokens
   # Add variable TOKEN in TravisCI settings
   api_key: $TOKEN
-  file: master-thesis-$(date +%d.%m.%Y_%R).pdf presentation/presentation.pdf
+  file: master-thesis.pdf presentation/presentation.pdf
+  name: Build $(date +'%d.%m.%Y %R')
   skip-cleanup: true

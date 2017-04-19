@@ -70,10 +70,12 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 sudo apt install texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyrillic latexmk texlive-fonts-extra texlive-math-extra latex-beamer
 ```
 
-Для работы понадобятся шрифты Times New Roman и XITS-math:
+Для работы понадобятся шрифты Times New Roman, XITS-math, PT Sans:
 ```bash
 sudo apt install ttf-mscorefonts-installer
-sudo wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/xits-math.otf && sudo fc-cache -f -v
+sudo wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/xits-math.otf
+sudo wget http://www.paratype.ru/uni/public/PTSansOFL.zip && sudo unzip PTSansOFL.zip -d /usr/share/fonts/
+sudo rm -f PTSansOFL.zip && sudo fc-cache -f -v
 ```
 
 Пример компиляции проекта с помощью Makefile:
