@@ -1,4 +1,4 @@
-master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
+master-thesis [![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)](https://travis-ci.org/Amet13/master-thesis/)
 =============
 Выпускная квалификационная работа (ВКР) магистра в LaTeX, оформленная в соответствии с нормоконтролем Севастопольского государственного университета в 2017 году
 
@@ -37,16 +37,15 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 └── vulncontrol
 ```
 
-В корневом каталоге находятся файлы `Dockerfile`, `main.tex`, `Makefile`, `master-thesis.pdf`, `preamble.tex`, `README.md`, `.gitmodules`, `.travis.yml`:
-* с помощью `Dockerfile` можно собрать проект в docker-контейнере без установки LaTeX на локальный компьютер
+В корневом каталоге находятся файлы:
+* `Dockerfile` с его помощью можно собрать проект в Docker-контейнере без установки LaTeX на локальный компьютер
 * в `main.tex` подключаются все остальные файлы
 * с помощью `Makefile` можно собрать проект
 * файл `master-thesis.pdf` является результатом компиляции проекта
 * в `preamble.tex` задается преамбула
 * файл `.gitmodules` подключает к проекту репозиторий `vulncontrol`
 * файл `.travis.yml` необходим для сборки git-проекта в окружении TravisCI
-
-В каталоге `images/` находятся рисунки и схемы.
+* в каталоге `images/` находятся изображения, используемые в тексте диплома
 
 В каталоге `inc/` находятся файлы, которые подключаются к `main.tex`:
 * файлы формата `0-*.tex` являются ненумерованными секциями (например введение, заключение, библиография)
@@ -55,22 +54,22 @@ master-thesis ![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 
 В каталоге `presentation/` находятся файлы необходимые для сборки слайдов презентации:
 * `beamerthemeMasterThesis.sty` является файлом стиля презентации
-* `main.tex` является преамбулой и "костяком" проекта
+* в файле `main.tex` находится преамбула
 * `Makefile` необходим для сборки
 * `slides.tex` является файлом, содержащим текст презентации
 * `presentation.pdf` является результатом компиляции слайдов презентации
 * каталог `images/` содержит изображения, используемые в презентации
 
-Каталог `vulncontrol/` является ссылкой на репозиторий, содержащий исходный код скрипта, используемого в ВКР.
+Каталог `vulncontrol/` является ссылкой на [репозиторий](https://github.com/Amet13/vulncontrol), содержащий исходный код скрипта для сбора данных по уязвимостям.
 
 Работа с LaTeX
 --------------
-Как установить нужные пакеты LaTeX в Ubuntu/Mint:
+Установка нужных пакетов LaTeX в Ubuntu/Mint:
 ```bash
 sudo apt install texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyrillic latexmk texlive-fonts-extra texlive-math-extra latex-beamer
 ```
 
-Для работы понадобятся шрифты Times New Roman, XITS-math, PT Sans:
+Для сборки проекта понадобится установка шрифтов Times New Roman, XITS Math, PT Sans:
 ```bash
 sudo apt install ttf-mscorefonts-installer
 sudo wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/xits-math.otf
@@ -97,15 +96,13 @@ make pres
 
 Docker
 ------
-Проект можно собрать в Docker, в таком случае не придется устанавливать LaTeX на локальную машину.
+Проект можно собрать в Docker, в таком случае не придется устанавливать LaTeX.
 Docker уже должен быть установлен на сервере или локальной машине:
 ```
 git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
 make docker
 ```
-
-Если же сборка прошла нормально, то в каталоге репозитория будет создан или заменен файл `master-thesis.pdf`, а в каталоге `presentation/` создан или заменен файл `presentation.pdf`.
 
 Лицензия
 --------

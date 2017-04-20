@@ -3,9 +3,7 @@
 \documentclass[xetex,mathserif,serif,t]{beamer}
 % \documentclass[aspectratio=169,xetex,mathserif,serif,t]{beamer} % Если хотим соотношение сторон 16:9
 
-%-------------------------------------------------------------------------------
 %%% Преамбула
-
 \usetheme{MasterThesis} % Тема
 
 %%% Работа с русским языком
@@ -14,8 +12,7 @@
 \usepackage{xltxtra}
 
 \defaultfontfeatures{Ligatures=TeX} % Для преобразования -- и ---
-\setmainfont{PT Sans} % Гарнитуры http://fonts.ru/public/
-% \setmainfont{Arial} % Если хотите использовать привычный Arial
+\setmainfont{PT Sans}
 % \setmonofont{PT Mono}
 
 %%% Beamer по-русски
@@ -26,10 +23,6 @@
 %%% Дополнительная работа с математикой
 \usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
 \usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
-
-%%% Номера формул
-% \mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте
-% \usepackage{leqno} % Нумерация формул слева
 
 %%% Свои команды
 \DeclareMathOperator{\sgn}{\mathop{sgn}}
@@ -54,7 +47,6 @@
 \usepackage{lastpage} % Узнать, сколько всего страниц в документе
 \usepackage{soulutf8} % Модификаторы начертания
 \usepackage{csquotes} % Еще инструменты для ссылок
-% \usepackage[style=authoryear,maxcitenames=2,backend=biber,sorting=nty]{biblatex} % Библиография
 \usepackage{multicol} % Несколько колонок
 \usepackage{etoolbox} % Логические операторы
 
@@ -62,8 +54,6 @@
 \usepackage{tikz}
 \usepackage{pgfplots,pgfplotstable}
 \usepackage{verbatim,calc,ifthen}
-
-%-------------------------------------------------------------------------------
 
 \title{Иследование процессов обеспечения безопасности облачных сред}
 
