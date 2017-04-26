@@ -5,7 +5,7 @@ master-thesis [![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 Особенности
 -----------
 * использование XeLaTeX, основной шрифт Times New Roman, 14pt, полуторный межстрочный интервал
-* шрифт для формул XITS Math, шрифт для презентации PT Sans
+* шрифт для формул XITS Math, шрифты для презентации PT Sans, PT Mono
 * подрисуночные и подтабличные записи в формате `номерСекции.номерРисунка`
 * нумерация страниц посередине сверху
 * возможность указания начала нумерации страниц
@@ -73,8 +73,9 @@ sudo apt install texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyr
 ```bash
 sudo apt install ttf-mscorefonts-installer
 sudo wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/xits-math.otf
-sudo wget http://www.paratype.ru/uni/public/PTSansOFL.zip && sudo unzip PTSansOFL.zip -d /usr/share/fonts/
-sudo rm -f PTSansOFL.zip && sudo fc-cache -f -v
+sudo wget http://www.paratype.ru/uni/public/{PTSansOFL,PTMono}.zip
+sudo unzip PTSansOFL.zip -d /usr/share/fonts/ && sudo unzip PTMono.zip -d /usr/share/fonts/
+sudo rm -f {PTSansOFL,PTMono}.zip && sudo fc-cache -f -v
 ```
 
 Пример компиляции проекта с помощью Makefile:
