@@ -14,9 +14,10 @@ RUN apt update && \
 RUN apt install -y --reinstall ttf-mscorefonts-installer
 
 RUN wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/xits-math.otf && \
-    wget http://www.paratype.ru/uni/public/{PTSansOFL,PTMono}.zip && \
+    wget http://www.paratype.ru/uni/public/PTSansOFL.zip && \
+    wget http://www.paratype.ru/uni/public/PTMono.zip && \
     unzip PTSansOFL.zip -d /usr/share/fonts/ && unzip PTMono.zip -d /usr/share/fonts/ && \
-    rm -f {PTSansOFL,PTMono}.zip && \
+    rm -f PTSansOFL.zip PTMono.zip && \
     fc-cache -f -v
 
 VOLUME $DIR
