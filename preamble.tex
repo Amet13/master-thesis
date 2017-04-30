@@ -19,14 +19,13 @@
 \defaultfontfeatures{Ligatures=TeX}
 \setmainfont{Times New Roman} % Нормоконтроллеры хотят именно его
 \newfontfamily\cyrillicfont{Times New Roman}
-%\setsansfont{Liberation Sans} % Тут я его не использую, но если пригодится
+% \setsansfont{Liberation Sans} % Тут я его не использую, но если пригодится
 \setmonofont{FreeMono} % Моноширинный шрифт для оформления кода
 
 % Формулы
-\usepackage{mathtools}
-\usepackage{unicode-math} % Не совместим с amsmath
-\setmathfont{XITS Math}   % Шрифт для формул: https://github.com/khaledhosny/xits-math
-\numberwithin{equation}{section} % Формула вида секция.номер
+\usepackage{mathtools,unicode-math} % Не совместим с amsmath
+\setmathfont{XITS Math}             % Шрифт для формул: https://github.com/khaledhosny/xits-math
+\numberwithin{equation}{section}    % Формула вида секция.номер
 
 % Русский язык
 \usepackage{polyglossia}
@@ -44,6 +43,7 @@
 
 % Формат подрисуночных записей
 \usepackage{chngcntr}
+
 % Сбрасываем счетчик таблиц и рисунков в каждой новой главе
 \counterwithin{figure}{section}
 \counterwithin{table}{section}

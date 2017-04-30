@@ -69,7 +69,7 @@ master-thesis [![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)
 sudo apt install texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyrillic latexmk texlive-fonts-extra texlive-math-extra latex-beamer
 ```
 
-Для сборки проекта понадобится установка шрифтов Times New Roman, XITS Math, PT Sans:
+Для сборки проекта понадобится установка шрифтов Times New Roman, XITS Math, PT Sans, PT Mono:
 ```bash
 sudo apt install ttf-mscorefonts-installer
 sudo wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/xits-math.otf

@@ -1,15 +1,14 @@
 %!TEX TS-program = xelatex
 
 \documentclass[xetex,mathserif,serif,t]{beamer}
-% \documentclass[aspectratio=169,xetex,mathserif,serif,t]{beamer} % Если хотим соотношение сторон 16:9
+% Если хотим соотношение сторон 16:9
+% \documentclass[aspectratio=169,xetex,mathserif,serif,t]{beamer}
 
 %%% Преамбула
 \usetheme{MasterThesis} % Тема
 
 %%% Работа с русским языком
-\usepackage{fontspec}
-\usepackage{xunicode}
-\usepackage{xltxtra}
+\usepackage{fontspec,xunicode,xltxtra}
 
 \defaultfontfeatures{Ligatures=TeX} % Для преобразования -- и ---
 \setmainfont{PT Sans}
@@ -51,8 +50,7 @@
 \usepackage{etoolbox} % Логические операторы
 
 %%% Картинки
-\usepackage{tikz}
-\usepackage{calc,ifthen,color}
+\usepackage{tikz,calc,ifthen,color}
 
 \title{Исследование процессов обеспечения безопасности облачных сред}
 \author[Умеров Амет]{Умеров Амет}
