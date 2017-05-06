@@ -15,7 +15,6 @@
     \item Cloud Security Alliance (CSA)
     \item National Institute of Standards and Technology (NIST)
     \item Internet Engineering Task Force (IETF)
-    \item Open Data Center Alliance (ODCA)
 \end{itemize}
 
 \vspace{\baselineskip}
@@ -24,8 +23,7 @@
 \begin{itemize}
     \item продвижением идей соблюдения безопасности
     \item исследованиями по защите
-    \item разработкой руководств по безопасности
-    \item организацией форумов по безопасности
+    \item разработкой руководств и организацией форумов по безопасности
 \end{itemize}
 \end{frame}
 
@@ -64,9 +62,9 @@
 \begin{itemize}
     \item многофакторная аутентификация (2FA/MFA)
     \item стойкое шифрование (SSL/TLS)
-    \item использование одноразовых паролей, токенов, USB-ключей, смарт-карт
+    \item использование одноразовых паролей и токенов
     \item контроль доступа, шифрование API
-    \item периодические пентестинги, аудиты безопасности
+    \item периодические пентестинги и аудиты безопасности
     \item регулярное сканирование на наличие уязвимостией
     \item мониторинг и логирование
     \item резервное копирование и репликация
@@ -122,37 +120,10 @@
 \frametitle{\insertsection}
 \framesubtitle{Пример --- выбор гипервизора}
 
-\begin{columns}
-    \begin{column}{0.45\textwidth}
-        Альтернативы:
-        \vspace{\baselineskip}
-        \begin{itemize}
-            \item KVM (M1)
-            \item Hyper-V (M2)
-            \item VMware vSphere (M3)
-        \end{itemize}
-    \end{column}
-    \begin{column}{0.55\textwidth}
-        Критерии выбора:
-        \begin{itemize}
-            \item цена (А1)
-            \item масштабируемость (А2)
-            \item отказоустойчивость (А3)
-            \item интерфейсы управления (А4)
-        \end{itemize}
-    \end{column}
-\end{columns}
-
-\begin{table}
-    \begin{tabular}{|l|l|l|l|l|}
-        \hline  & \textbf{A1} & \textbf{A2} & \textbf{A3} & \textbf{A4} \\
-        \hline \textbf{M1} & 22,5\% & 44,97\% & 33,24\% & 2,28\% \\
-        \hline \textbf{M2} & 7,45\% & 14,75\% & 72,83\% & 4,97\% \\
-        \hline \textbf{M3} & 3,51\% & 20,78\% & 71,22\% & 4,85\% \\
-        \hline
-  \end{tabular}
-\end{table}
-
+\begin{figure}
+    \center
+    \includegraphics[width=\linewidth]{mai}
+\end{figure}
 \end{frame}
 
 %-------------------------------------------------------------------------------
@@ -217,7 +188,7 @@ Password: dirtyCowFun \\
 \frametitle{\insertsection}
 \framesubtitle{https://github.com/Amet13/vulncontrol}
 
-{\scriptsize \texttt{\$ ./vulncontrol.py −d 2017−02−18 −m 5 -t \$TOKEN:\$ID \\
+{\scriptsize \texttt{\$ ./vulncontrol.py −d 2017−02−18 −m 5 -t \$TOKEN \$ID \\
 CVE−2017−6074 9.3 http://www.cvedetails.com/cve/CVE−2017−6074/ \\
 CVE−2017−6001 7.6 http://www.cvedetails.com/cve/CVE−2017−6001/ \\
 CVE−2017−5986 7.1 http://www.cvedetails.com/cve/CVE−2017−5986/ \\
@@ -240,12 +211,12 @@ Telegram alert sent
 
 \begin{itemize}
     \item обзор литературных источников и открытых стандартов
-    \item анализ зарубежного и отечественного рынка облачных услуг
+    \item анализ рынка облачных услуг
     \item определение угроз безопасности облачных вычислений и методов их решения
     \item системный анализ безопасности облачной среды
     \item вариантный анализ для выбора оптимальной альтернативы
     \item сбор данных по наиболее опасным уязвимостям в ПО
-    \item практическая эксплуатация уязвимости
+    \item практическая эксплуатация уязвимости CVE-2016-5195
     \item разработка системы сбора данных по уязвимостям
     \item публикация исследований под свободной лицензией CC BY-SA 4.0, исходного кода под GPLv3
 \end{itemize}

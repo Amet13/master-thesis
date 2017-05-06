@@ -1,4 +1,4 @@
-master-thesis [![TravisCI](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)](https://travis-ci.org/Amet13/master-thesis/) [![Лицензия на исходный код](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.ru.html) [![Лицензия на произведения](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
+master-thesis [![TravisCI](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)](https://travis-ci.org/Amet13/master-thesis/) [![Лицензия на исходный код](https://img.shields.io/badge/license-GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.ru.html) [![Лицензия на произведения](https://img.shields.io/badge/license-CC_BY--SA-blue.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
 =============
 Выпускная квалификационная работа (ВКР) магистра в LaTeX, оформленная в соответствии с нормоконтролем Севастопольского государственного университета в 2017 году
 
@@ -95,7 +95,7 @@ make clean
 make pres
 ```
 
-Docker
+Docker [![Docker](https://img.shields.io/badge/docker_build-passing-green.svg)](https://github.com/Amet13/master-thesis/blob/master/Dockerfile)
 ------
 Проект можно собрать в Docker, в таком случае не придется устанавливать LaTeX.
 Docker уже должен быть установлен на сервере или локальной машине:
