@@ -1,4 +1,4 @@
-master-thesis [![](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)](https://travis-ci.org/Amet13/master-thesis/)
+master-thesis [![TravisCI](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)](https://travis-ci.org/Amet13/master-thesis/) [![Лицензия на исходный код](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.ru.html) [![Лицензия на произведения](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
 =============
 Выпускная квалификационная работа (ВКР) магистра в LaTeX, оформленная в соответствии с нормоконтролем Севастопольского государственного университета в 2017 году
 
@@ -104,7 +104,3 @@ git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
 make docker
 ```
-
-Лицензия на произведения
-------------------------
-[![CC BY SA](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/deed.ru)
