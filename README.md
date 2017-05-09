@@ -1,4 +1,4 @@
-master-thesis [![TravisCI](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)](https://travis-ci.org/Amet13/master-thesis/) [![Лицензия на исходный код](https://img.shields.io/badge/license-GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.ru.html) [![Лицензия на произведения](https://img.shields.io/badge/license-CC_BY--SA-blue.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
+master-thesis [![TravisCI](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)](https://travis-ci.org/Amet13/master-thesis/) [![Лицензия на исходный код](https://img.shields.io/badge/license-GNU_GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.ru.html) [![Лицензия на произведения](https://img.shields.io/badge/license-CC_BY--SA_4.0-blue.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
 =============
 Выпускная квалификационная работа (ВКР) магистра в LaTeX, оформленная в соответствии с нормоконтролем Севастопольского государственного университета в 2017 году
 
@@ -38,7 +38,7 @@ master-thesis [![TravisCI](https://travis-ci.org/Amet13/master-thesis.svg?branch
 ```
 
 В корневом каталоге находятся файлы:
-* `Dockerfile` с его помощью можно собрать проект в Docker-контейнере без установки LaTeX на локальный компьютер
+* `Dockerfile`, с его помощью можно собрать проект в Docker-контейнере без установки LaTeX на локальный компьютер
 * в `main.tex` подключаются все остальные файлы
 * с помощью `Makefile` можно собрать проект
 * файл `master-thesis.pdf` является результатом компиляции проекта
@@ -96,10 +96,10 @@ make clean
 make pres
 ```
 
-Docker [![Docker](https://img.shields.io/badge/docker_build-passing-green.svg)](https://github.com/Amet13/master-thesis/blob/master/Dockerfile)
+Docker [![Docker](https://img.shields.io/badge/docker_build-passing-green.svg)](https://github.com/Amet13/master-thesis/releases)
 ------
 Проект можно собрать в Docker, в таком случае не придется устанавливать LaTeX.
-Docker уже должен быть установлен на сервере или локальной машине:
+Docker уже должен быть установлен на сервере или локальном компьютере:
 ```
 git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
