@@ -37,6 +37,7 @@ master-thesis
 ├── images
 ├── inc
 ├── presentation
+├── presentation_it_planet
 └── vulncontrol
 ```
 
@@ -62,6 +63,8 @@ master-thesis
 * `slides.tex` является файлом, содержащим текст презентации
 * `presentation.pdf` является результатом компиляции слайдов презентации
 * `report.md` содержит сопровождающий текст к слайдам презентации
+
+В каталоге `presentation_it_planet` находится презентация, которая использовалась на конкурсе.
 
 Каталог `vulncontrol/` является ссылкой на [репозиторий](https://github.com/Amet13/vulncontrol), содержащий исходный код скрипта для сбора данных по уязвимостям.
 
@@ -104,7 +107,7 @@ Docker
 
 Проект можно собрать в Docker, в таком случае не придется устанавливать LaTeX.
 Docker уже должен быть установлен на сервере или локальном компьютере:
-```
+```bash
 git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
 make docker

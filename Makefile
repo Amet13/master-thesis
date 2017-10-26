@@ -26,3 +26,6 @@ docker:
 
 pres:
 	make -C presentation run
+
+pres_it_planet:
+	make -C presentation_it_planet run
