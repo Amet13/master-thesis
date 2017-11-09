@@ -85,3 +85,25 @@
     }
     \vskip0pt%
 }
+
+\setbeamertemplate{title page}{%
+    \begin{minipage}{\linewidth}
+        \centering
+        \vspace{\baselineskip}
+        \small\insertinstitute
+
+        \vspace{2\baselineskip}
+        \textcolor{Blue}{\normalsize\insertsubtitle} \\
+
+        \vspace{\baselineskip}
+        \textcolor{Blue}{\Large\inserttitle} \\
+
+        \vspace{2\baselineskip}
+        \begin{flushright}
+            \small\insertauthor \\
+        \end{flushright}
+
+        \vspace{2\baselineskip}
+        \small\insertdate
+    \end{minipage}
+}
