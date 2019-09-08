@@ -15,7 +15,7 @@ jobs:
         git submodule update --remote
         docker build -t docker-latex .
         docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
-        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "latexmk -xelatex -synctex=1 -jobname=presentation presentation/main.tex"
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
 
     - name: Release
       uses: docker://softprops/action-gh-release
