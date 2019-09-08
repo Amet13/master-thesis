@@ -9,8 +9,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Set Docker
-      uses: actions/docker/cli@master
     - name: Build
       run: |
         make docker
+    - name: Release
+      uses: docker://softprops/action-gh-release
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          master-thesis.pdf
+          presentation/presentation.pdf
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
