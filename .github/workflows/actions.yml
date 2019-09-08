@@ -12,8 +12,8 @@ jobs:
     - name: Build
       run: |
         docker build -t docker-latex .
-        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "make build && make clean"
-        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "make -C presentation && make -C presentation clean"
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "make build"
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "make -C presentation"
 
     - name: Release
       uses: docker://softprops/action-gh-release
