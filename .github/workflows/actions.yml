@@ -11,9 +11,10 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build
       run: |
+        git submodule update --remote
         docker build -t docker-latex .
-        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "git submodule update --remote && latexmk -f -xelatex -synctex=1 -jobname=master-thesis main.tex"
-        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "latexmk -f -xelatex -synctex=1 -jobname=presentation presentation/main.tex"
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "latexmk -xelatex -synctex=1 -jobname=presentation presentation/main.tex"
 
     - name: Release
       uses: docker://softprops/action-gh-release
