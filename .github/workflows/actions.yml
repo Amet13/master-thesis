@@ -1,0 +1,28 @@
+name: master-thesis
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: |
+        git submodule init
+        git submodule update --remote
+        docker build -t docker-latex .
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
+
+    - name: Release
+      uses: docker://softprops/action-gh-release
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          master-thesis.pdf
+          presentation/presentation.pdf
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
