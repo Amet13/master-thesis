@@ -1,0 +1,16 @@
+name: master-thesis
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set Docker
+      uses: actions/docker/cli@master
+    - name: Build
+      run: |
+        make docker

@@ -1,6 +1,7 @@
 master-thesis
 =============
-[![TravisCI](https://travis-ci.org/Amet13/master-thesis.svg?branch=master)](https://travis-ci.org/Amet13/master-thesis/)
+
+[![Actions Status](https://github.com/Amet13/master-thesis/workflows/master-thesis/badge.svg)](https://github.com/Amet13/master-thesis/actions)
 [![Лицензия на исходный код](https://img.shields.io/badge/license-GNU_GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.ru.html)
 [![Лицензия на произведения](https://img.shields.io/badge/license-CC_BY--SA_4.0-blue.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
 
