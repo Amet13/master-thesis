@@ -11,7 +11,10 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build
       run: |
-        make docker
+        docker build -t docker-latex .
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "make build && make clean"
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "make -C presentation && make -C presentation clean"
+
     - name: Release
       uses: docker://softprops/action-gh-release
       if: startsWith(github.ref, 'refs/tags/')
