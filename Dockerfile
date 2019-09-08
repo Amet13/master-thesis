@@ -25,10 +25,10 @@ RUN apt update && \
 # Times New Roman and other fonts
 RUN apt install -y --reinstall ttf-mscorefonts-installer && \
     wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/XITSMath-Regular.otf && \
-    wget http://www.paratype.ru/uni/public/PTSansOFL.zip && \
-    wget http://www.paratype.ru/uni/public/PTMono.zip && \
-    unzip PTSansOFL.zip -d /usr/share/fonts/ && unzip PTMono.zip -d /usr/share/fonts/ && \
-    rm -f PTSansOFL.zip PTMono.zip && \
+    wget http://bbgentoo.ilb.ru/distfiles/PTSansOFL.zip && \
+    wget http://bbgentoo.ilb.ru/distfiles/PTMonoOFL.zip && \
+    unzip PTSansOFL.zip -d /usr/share/fonts/ && unzip PTMonoOFL.zip -d /usr/share/fonts/ && \
+    rm -f PTSansOFL.zip PTMonoOFL.zip && \
     fc-cache -f -v
 
 VOLUME $DIR
