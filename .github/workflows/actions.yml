@@ -24,5 +24,6 @@ jobs:
         files: |
           master-thesis.pdf
           presentation/presentation.pdf
+        name: "Build $(date +'%d.%m.%Y %R')"
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
