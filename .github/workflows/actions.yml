@@ -1,13 +1,14 @@
 name: master-thesis
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
 
 jobs:
   build:
 
-    runs-on:
-      - ubuntu-latest
-      - macOS-latest
+    runs-on: ubuntu-latest
 
     steps:
 
@@ -19,7 +20,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         DOCKER_REPO: "docker.pkg.github.com"
         IMAGE_NAME: "docker-latex"
-        IMAGE_TAG: "latest"
       run: |
         # Pull submodules
         git submodule init
@@ -27,16 +27,19 @@ jobs:
         # Login to GitHub Packages
         docker login ${DOCKER_REPO} -u amet13 -p ${GITHUB_TOKEN}
         # Build Docker image
-        docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+        docker build -t ${IMAGE_NAME}:${GITHUB_SHA} .
         # Generate PDF artifacts
         docker run --rm -i -v ${PWD}:/master-thesis:Z ${IMAGE_NAME} \
           bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
         docker run --rm -i -v ${PWD}:/master-thesis:Z ${IMAGE_NAME} \
           bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
-        # Publish Docker image to GitHub Packages
-        docker tag ${IMAGE_NAME}:latest \
-          ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:${IMAGE_TAG}
-        docker push ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:${IMAGE_TAG}
+        # Publish Docker image to GitHub Packages (with latest tag)
+        docker tag ${IMAGE_NAME}:${GITHUB_SHA} \
+          ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:${GITHUB_SHA}
+        docker tag ${IMAGE_NAME}:${GITHUB_SHA} \
+          ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:latest
+        docker push ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:${GITHUB_SHA}
+        docker push ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:latest
 
     - name: Create GitHub release with artifacts
       uses: softprops/action-gh-release@v1
@@ -45,6 +48,6 @@ jobs:
         files: |
           master-thesis.pdf
           presentation/presentation.pdf
-        name: "Build `date +'%d.%m.%Y %R'`"
+        name: "Build ${GITHUB_SHA}"
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
