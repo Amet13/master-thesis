@@ -18,28 +18,25 @@ jobs:
     - name: Build docker image and push it to the registry
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        DOCKER_REPO: "docker.pkg.github.com"
-        IMAGE_NAME: "docker-latex"
+        DOCKER_IMAGE_ORIGIN: "docker.pkg.github.com/amet13/master-thesis/docker-latex"
       run: |
         # Pull submodules
         git submodule init
         git submodule update --remote
-        # Login to GitHub Packages
-        docker login ${DOCKER_REPO} -u amet13 -p ${GITHUB_TOKEN}
         # Build Docker image
-        docker build -t ${IMAGE_NAME} .
+        docker pull ${DOCKER_IMAGE_ORIGIN}:latest
+        docker build -t ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} .
         # Generate PDF artifacts
-        docker run --rm -i -v ${PWD}:/master-thesis:Z ${IMAGE_NAME} \
+        docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} \
           bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
-        docker run --rm -i -v ${PWD}:/master-thesis:Z ${IMAGE_NAME} \
+        docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} \
           bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
+        # Login to GitHub Packages
+        docker login docker.pkg.github.com -u amet13 -p ${GITHUB_TOKEN}
         # Publish Docker image to GitHub Packages (with latest tag)
-        docker tag ${IMAGE_NAME} \
-          ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:${GITHUB_SHA}
-        docker tag ${IMAGE_NAME} \
-          ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:latest
-        docker push ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:${GITHUB_SHA}
-        docker push ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:latest
+        docker tag ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} ${DOCKER_IMAGE_ORIGIN}:latest
+        docker push ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA}
+        docker push ${DOCKER_IMAGE_ORIGIN}:latest
 
     - name: Create GitHub release with artifacts
       uses: softprops/action-gh-release@v1
