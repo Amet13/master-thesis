@@ -12,25 +12,30 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v1
 
-    - name: Build docker image and push to the registry
+    - name: Build docker image and push it to the registry
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        DOCKER_REPO: "docker.pkg.github.com"
+        IMAGE_NAME: "docker-latex"
+        IMAGE_TAG: $(date +'%d.%m.%Y %R')
       run: |
-        # Submodules pull
+        echo "${IMAGE_TAG}"
+        # Pull submodules
         git submodule init
         git submodule update --remote
         # Login to GitHub Packages
-        docker login docker.pkg.github.com -u Amet13 -p ${GITHUB_TOKEN}
-        # Build image and generate PDF artifacts
-        docker build -t docker-latex .
-        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash \
-          -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
-        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash \
-          -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
-        # Publish image to GitHub Packages
-        docker tag docker-latex:latest \
-          -t docker.pkg.github.com/Amet13/master-thesis/docker-latex:latest
-        docker push docker.pkg.github.com/amet13/master-thesis/docker-latex:latest
+        docker login ${DOCKER_REPO} -u amet13 -p ${GITHUB_TOKEN}
+        # Build Docker image
+        docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+        # Generate PDF artifacts
+        docker run --rm -i -v ${PWD}:/master-thesis:Z ${IMAGE_NAME} \
+          bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
+        docker run --rm -i -v ${PWD}:/master-thesis:Z ${IMAGE_NAME} \
+          bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
+        # Publish Docker image to GitHub Packages
+        docker tag ${IMAGE_NAME}:latest \
+          ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:${IMAGE_TAG}
+        docker push ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:${IMAGE_TAG}
 
     - name: Create GitHub release with artifacts
       uses: softprops/action-gh-release@v1
