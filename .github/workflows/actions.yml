@@ -23,7 +23,8 @@ jobs:
         # Pull submodules
         git submodule init
         git submodule update --remote
-        # Build Docker image
+        # Login to GitHub Packages and build Docker image
+        docker login docker.pkg.github.com -u amet13 -p ${GITHUB_TOKEN}
         docker pull ${DOCKER_IMAGE_ORIGIN}:latest
         docker build -t ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} .
         # Generate PDF artifacts
@@ -31,8 +32,6 @@ jobs:
           bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
         docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} \
           bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
-        # Login to GitHub Packages
-        docker login docker.pkg.github.com -u amet13 -p ${GITHUB_TOKEN}
         # Publish Docker image to GitHub Packages (with latest tag)
         docker tag ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} ${DOCKER_IMAGE_ORIGIN}:latest
         docker push ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA}
