@@ -27,16 +27,16 @@ jobs:
         # Login to GitHub Packages
         docker login ${DOCKER_REPO} -u amet13 -p ${GITHUB_TOKEN}
         # Build Docker image
-        docker build -t ${IMAGE_NAME}:${GITHUB_SHA} .
+        docker build -t ${IMAGE_NAME} .
         # Generate PDF artifacts
         docker run --rm -i -v ${PWD}:/master-thesis:Z ${IMAGE_NAME} \
           bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
         docker run --rm -i -v ${PWD}:/master-thesis:Z ${IMAGE_NAME} \
           bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
         # Publish Docker image to GitHub Packages (with latest tag)
-        docker tag ${IMAGE_NAME}:${GITHUB_SHA} \
+        docker tag ${IMAGE_NAME} \
           ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:${GITHUB_SHA}
-        docker tag ${IMAGE_NAME}:${GITHUB_SHA} \
+        docker tag ${IMAGE_NAME} \
           ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:latest
         docker push ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:${GITHUB_SHA}
         docker push ${DOCKER_REPO}/amet13/master-thesis/${IMAGE_NAME}:latest
