@@ -8,22 +8,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Build
+
+    - name: Checkout repo
+      uses: actions/checkout@v1
+
+    - name: Build docker image and push to the registry
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
+        # Submodules pull
         git submodule init
         git submodule update --remote
+        # Login to GitHub Packages
+        docker login docker.pkg.github.com -u Amet13 -p ${GITHUB_TOKEN}
+        # Build image and generate PDF artifacts
         docker build -t docker-latex .
-        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
-        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash \
+          -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
+        docker run --rm -i -v ${PWD}:/master-thesis:Z docker-latex bash \
+          -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
+        # Publish image to GitHub Packages
+        docker tag docker-latex:latest \
+          -t docker.pkg.github.com/Amet13/master-thesis/docker-latex:latest
+        docker push docker.pkg.github.com/amet13/master-thesis/docker-latex:latest
 
-    - name: Release
-      uses: docker://softprops/action-gh-release
+    - name: Create GitHub release with artifacts
+      uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
           master-thesis.pdf
           presentation/presentation.pdf
-        name: "Build $(date +'%d.%m.%Y %R')"
+        name: "Build `date +'%d.%m.%Y %R'`"
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

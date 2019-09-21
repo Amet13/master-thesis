@@ -1,6 +1,7 @@
 all: build run
 
 build:
+	git submodule init
 	git submodule update --remote
 	latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex
 
