@@ -127,3 +127,5 @@ git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
 make docker
 ```
+
+Либо же использовать уже собранный мною образ [отсюда](https://github.com/Amet13/master-thesis/packages/25214).
