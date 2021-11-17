@@ -4,24 +4,21 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-
     - name: Checkout repo
       uses: actions/checkout@v1
 
     - name: Build docker image and push it to the registry
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        DOCKER_IMAGE_ORIGIN: "docker.pkg.github.com/amet13/master-thesis/docker-latex"
+        DOCKER_IMAGE_ORIGIN: "ghcr.io/amet13/master-thesis/docker-latex"
       run: |
         # Pull submodules
         git submodule init
         git submodule update --remote
         # Login to GitHub Packages and build Docker image
-        docker login docker.pkg.github.com -u amet13 -p ${GITHUB_TOKEN}
+        docker login ghcr.io -u amet13 -p ${GITHUB_TOKEN}
         docker pull ${DOCKER_IMAGE_ORIGIN}:latest
         docker build -t ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} .
         # Generate PDF artifacts

@@ -9,4 +9,5 @@
 *.toc
 *.nav
 *.snm
+*.xdv
 .DS_Store

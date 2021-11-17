@@ -1,4 +1,5 @@
-FROM ubuntu:18.04
+# syntax=docker/dockerfile:1
+FROM ubuntu:20.04
 LABEL maintainer="Amet13 <admin@amet13.name>"
 
 ENV DEBIAN_FRONTEND noninteractive
