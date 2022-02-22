@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM ubuntu:20.04
 LABEL maintainer="Amet13 <admin@amet13.name>"
+LABEL org.opencontainers.image.description "https://github.com/Amet13/master-thesis"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
