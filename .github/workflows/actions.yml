@@ -1,6 +1,9 @@
 name: master-thesis
 
-on: [push]
+on:
+  push:
+    tags:
+      - 1.*
 
 jobs:
   build:
@@ -20,15 +23,15 @@ jobs:
         # Login to GitHub Packages and build Docker image
         docker login ghcr.io -u amet13 -p ${GITHUB_TOKEN}
         docker pull ${DOCKER_IMAGE_ORIGIN}:latest
-        docker build -t ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} .
+        docker build -t ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} .
         # Generate PDF artifacts
-        docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} \
+        docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} \
           bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
-        docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} \
+        docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} \
           bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
         # Publish Docker image to GitHub Packages (with latest tag)
-        docker tag ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA} ${DOCKER_IMAGE_ORIGIN}:latest
-        docker push ${DOCKER_IMAGE_ORIGIN}:${GITHUB_SHA}
+        docker tag ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} ${DOCKER_IMAGE_ORIGIN}:latest
+        docker push ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME}
         docker push ${DOCKER_IMAGE_ORIGIN}:latest
 
     - name: Create GitHub release with artifacts
