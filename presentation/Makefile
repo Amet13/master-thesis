@@ -4,8 +4,8 @@ build:
 	latexmk -xelatex -synctex=1 -jobname=presentation main.tex
 
 run: build clean
-	# Я использую xreader для просмотра PDF
-	xreader presentation.pdf &
+	# Я использую macOS
+	open presentation.pdf &
 
 clean:
 	rm *.aux \
@@ -16,4 +16,5 @@ clean:
 	*.synctex.gz \
 	*.toc \
 	*.snm \
-	*.nav
+	*.nav \
+	*.xdv
