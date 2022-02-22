@@ -38,6 +38,5 @@ jobs:
         files: |
           master-thesis.pdf
           presentation/presentation.pdf
-        name: "Build ${GITHUB_SHA}"
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
