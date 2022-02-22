@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM ubuntu:20.04
 LABEL maintainer="Amet13 <admin@amet13.name>"
+LABEL org.opencontainers.image.description "https://github.com/Amet13/master-thesis"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
@@ -9,12 +10,14 @@ ENV DIR /master-thesis
 RUN mkdir $DIR
 RUN echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
 RUN apt update && \
-    apt install -y wget \
+    apt install --no-install-recommends -y \
+        wget \
         git \
         make \
         apt-transport-https \
         unzip && \
-    apt install -y texlive-base \
+    apt install --no-install-recommends -y \
+        texlive-base \
         texlive-latex-extra \
         texlive-xetex \
         texlive-lang-cyrillic \
@@ -24,7 +27,10 @@ RUN apt update && \
         latexmk
 
 # Times New Roman and other fonts
-RUN apt install -y --reinstall ttf-mscorefonts-installer && \
+RUN apt install --no-install-recommends --reinstall -y \
+    ttf-mscorefonts-installer \
+    fonts-freefont-ttf \
+    fontconfig && \
     wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/XITSMath-Regular.otf && \
     wget https://ftp.tw.freebsd.org/distfiles/xorg/font/PTSansOFL.zip && \
     wget https://ftp.tw.freebsd.org/distfiles/xorg/font/PTMonoOFL.zip && \
