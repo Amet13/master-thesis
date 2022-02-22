@@ -1,3 +1,4 @@
+# LaTeX
 *.aux
 *.fdb_latexmk
 *.fls
@@ -10,4 +11,6 @@
 *.nav
 *.snm
 *.xdv
+
+# macOS
 .DS_Store
