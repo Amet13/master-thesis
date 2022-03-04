@@ -12,6 +12,12 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
     - name: Build docker image and push it to the registry
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
