@@ -20,15 +20,20 @@ jobs:
         # Pull submodules
         git submodule init
         git submodule update --remote
+
         # Login to GitHub Packages and build Docker image
         docker login ghcr.io -u amet13 -p ${GITHUB_TOKEN}
         docker pull ${DOCKER_IMAGE_ORIGIN}:latest
-        docker build -t ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} .
+        docker buildx build \
+          --platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
+          -t ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} .
+
         # Generate PDF artifacts
         docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} \
           bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
         docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} \
           bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
+
         # Publish Docker image to GitHub Packages (with latest tag)
         docker tag ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} ${DOCKER_IMAGE_ORIGIN}:latest
         docker push ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME}
