@@ -31,9 +31,9 @@ RUN apt install --no-install-recommends --reinstall -y \
     ttf-mscorefonts-installer \
     fonts-freefont-ttf \
     fontconfig && \
-    wget --no-check-certificate -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/XITSMath-Regular.otf && \
-    wget --no-check-certificate https://ftp.tw.freebsd.org/distfiles/xorg/font/PTSansOFL.zip && \
-    wget --no-check-certificate https://ftp.tw.freebsd.org/distfiles/xorg/font/PTMonoOFL.zip && \
+    wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/XITSMath-Regular.otf && \
+    wget https://ftp.tw.freebsd.org/distfiles/xorg/font/PTSansOFL.zip && \
+    wget https://ftp.tw.freebsd.org/distfiles/xorg/font/PTMonoOFL.zip && \
     unzip -o PTSansOFL.zip -d /usr/share/fonts/ && unzip -o PTMonoOFL.zip -d /usr/share/fonts/ && \
     rm -f PTSansOFL.zip PTMonoOFL.zip && \
     fc-cache -f -v
