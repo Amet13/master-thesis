@@ -5,6 +5,9 @@ on:
     tags:
       - 1.*
 
+env:
+  DOCKER_IMAGE_ORIGIN: ghcr.io/amet13/master-thesis/docker-latex
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,10 +27,12 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GH_TOKEN }}
 
+    - name: Debug
+      run: |
+        echo ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME}
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
-      env:
-        DOCKER_IMAGE_ORIGIN: "ghcr.io/amet13/master-thesis/docker-latex"
       with:
         context: .
         push: true
