@@ -29,7 +29,7 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: master-thesis/docker-latex:latest
-        options: -v ${PWD}:/master-thesis:Z
+        options: -v ${{ github.workspace }}:/master-thesis:Z
         run: |
           latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex
           cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex
