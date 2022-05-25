@@ -31,7 +31,9 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ env.DOCKER_IMAGE_ORIGIN }}:${{ env.GITHUB_REF_NAME }},${{ env.DOCKER_IMAGE_ORIGIN }}:latest
+        tags: |
+          ${{ env.DOCKER_IMAGE_ORIGIN }}:${{ env.GITHUB_REF_NAME }}
+          ${{ env.DOCKER_IMAGE_ORIGIN }}:latest
         build-args: |
           DOCKER_IMAGE_ORIGIN=${{ env.DOCKER_IMAGE_ORIGIN }}
           GITHUB_REF_NAME=${{ env.GITHUB_REF_NAME }}
