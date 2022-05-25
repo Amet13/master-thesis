@@ -12,30 +12,35 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Build docker image and push it to the registry
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        DOCKER_IMAGE_ORIGIN: "ghcr.io/amet13/master-thesis/docker-latex"
+    - name: Prepare submodules
       run: |
-        # Pull submodules
         git submodule init
         git submodule update --remote
 
-        # Login to GitHub Packages and build Docker image
-        docker login ghcr.io -u amet13 -p ${GITHUB_TOKEN}
-        docker pull ${DOCKER_IMAGE_ORIGIN}:latest
-        docker build -t ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} .
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GH_TOKEN }}
 
-        # Generate PDF artifacts
-        docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} \
-          bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
-        docker run --rm -i -v ${PWD}:/master-thesis:Z ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} \
-          bash -c "cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex"
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v3
+      env:
+        DOCKER_IMAGE_ORIGIN: "ghcr.io/amet13/master-thesis/docker-latex"
+      with:
+        context: .
+        push: true
+        tags: ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME},${DOCKER_IMAGE_ORIGIN}:latest
 
-        # Publish Docker image to GitHub Packages (with latest tag)
-        docker tag ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME} ${DOCKER_IMAGE_ORIGIN}:latest
-        docker push ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME}
-        docker push ${DOCKER_IMAGE_ORIGIN}:latest
+    - name: Generate PDFs
+      uses: addnab/docker-run-action@v3
+      with:
+        image: ${DOCKER_IMAGE_ORIGIN}:${GITHUB_REF_NAME}
+        options: -v ${PWD}:/master-thesis:Z
+        run: |
+          latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex
+          cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex
 
     - name: Create GitHub release with artifacts
       uses: softprops/action-gh-release@v1

@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 LABEL maintainer="Amet13 <admin@amet13.name>"
 LABEL org.opencontainers.image.description "https://github.com/Amet13/master-thesis"
 
@@ -7,8 +7,9 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 ENV DIR /master-thesis
 
-RUN mkdir $DIR
-RUN echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
+RUN mkdir $DIR && \
+    echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
+
 RUN apt update && \
     apt install --no-install-recommends -y \
         wget \
