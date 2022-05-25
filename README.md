@@ -113,8 +113,6 @@ make pres
 
 ## Docker
 
-[![Docker](https://github.com/Amet13/master-thesis/workflows/master-thesis/badge.svg)](https://github.com/Amet13/master-thesis/packages/25214)
-
 Проект можно собрать в Docker, в таком случае не придется устанавливать LaTeX.
 Docker уже должен быть установлен на сервере или локальном компьютере:
 
@@ -123,5 +121,3 @@ git clone --recursive https://github.com/Amet13/master-thesis
 cd master-thesis/
 make docker
 ```
-
-Либо же использовать уже собранный мною образ [отсюда](https://github.com/Amet13/master-thesis/packages/25214).
