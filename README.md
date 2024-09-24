@@ -86,7 +86,7 @@ sudo apt install texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyr
 ```bash
 sudo apt install ttf-mscorefonts-installer fonts-freefont-ttf fontconfig
 sudo wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/XITSMath-Regular.otf
-sudo wget https://ftp.tw.freebsd.org/distfiles/xorg/font/{PTSansOFL,PTMonoOFL}.zip
+sudo wget https://ponce.cc/slackware/sources/repo/ttf-paratype-pt-fonts/{PTSansOFL,PTMonoOFL}.zip
 sudo unzip -o PTSansOFL.zip -d /usr/share/fonts/ && sudo unzip -o PTMonoOFL.zip -d /usr/share/fonts/
 sudo rm -f {PTSansOFL,PTMonoOFL}.zip && sudo fc-cache -f -v
 ```
