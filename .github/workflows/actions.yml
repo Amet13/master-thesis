@@ -35,7 +35,7 @@ jobs:
           cd presentation/ && latexmk -xelatex -synctex=1 -jobname=presentation main.tex
 
     - name: Create GitHub release with artifacts
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
