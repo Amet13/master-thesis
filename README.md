@@ -1,36 +1,38 @@
 # master-thesis
 
+[Русская версия](README-ru.md) | [English version](README.md)
+
 [![Actions Status](https://github.com/Amet13/master-thesis/workflows/master-thesis/badge.svg)](https://github.com/Amet13/master-thesis/actions)
-[![Лицензия на исходный код](https://img.shields.io/badge/license-GNU_GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.ru.html)
-[![Лицензия на произведения](https://img.shields.io/badge/license-CC_BY--SA_4.0-blue.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
+[![Source Code License](https://img.shields.io/badge/license-GNU_GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.ru.html)
+[![Content License](https://img.shields.io/badge/license-CC_BY--SA_4.0-blue.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
 
-Выпускная квалификационная работа (ВКР) магистра в LaTeX, оформленная в соответствии с нормоконтролем Севастопольского государственного университета в 2017 г.
+Master's thesis in LaTeX, formatted according to the standards of Sevastopol State University in 2017.
 
-## Особенности
+## Features
 
-* использование XeLaTeX, основной шрифт Times New Roman, 14pt, полуторный межстрочный интервал
-* шрифт для формул XITS Math, шрифты для презентации PT Sans, PT Mono
-* подрисуночные и подтабличные записи в формате `номерСекции.номерРисунка`
-* нумерация страниц посередине сверху
-* возможность указания начала нумерации страниц
-* возможность настройки отступов страниц
-* маркировка списка символом `—`
-* нумерованные списки обозначаются строчными буквами кириллицы со скобкой
-* названия секций в верхнем регистре, включая содержание
-* отступ в одну строку после имени заголовка
-* отступы в одну строку до и после имени заголовков второго и третьего уровней
-* пользовательские функции добавления рисунков, приложений и библиографии
-* использование `listings` для оформления листинга исходного кода в документе, шрифт FreeMono
-* возможность добавления своих PDF в документ
-* добавление библиографии в файл `0-bibliography.tex`
-* отдельные секции для аннотации, приложений
-* автоматически генерируемый список иллюстративного и табличного материала
-* ссылки на перечень сокращений и условных обозначений
-* слайды презентации
-* `Makefile` для компиляции и сборки проекта
-* `Dockerfile` для сборки проекта в изолированном окружении
+- use of XeLaTeX, main font Times New Roman, 14pt, 1.5 line spacing
+- XITS Math font for formulas, PT Sans and PT Mono fonts for presentation
+- figure and table captions in format `sectionNumber.figureNumber`
+- page numbers centered at the top
+- ability to specify starting page number
+- ability to configure page margins
+- list marking with `—` symbol
+- numbered lists are denoted by lowercase Cyrillic letters with parentheses
+- section titles in uppercase, including table of contents
+- one line indent after title name
+- one line indents before and after second and third level headings
+- custom functions for adding figures, appendices and bibliography
+- use of `listings` for formatting source code listings in document, FreeMono font
+- ability to add your own PDFs to the document
+- bibliography addition in `0-bibliography.tex` file
+- separate sections for abstract, appendices
+- automatically generated list of illustrative and tabular material
+- references to abbreviations and symbols list
+- presentation slides
+- `Makefile` for project compilation and building
+- `Dockerfile` for building project in isolated environment
 
-## Структура исходников
+## Source Structure
 
 ```
 .
@@ -42,46 +44,46 @@
 └── vulncontrol
 ```
 
-В корневом каталоге находятся файлы:
+In the root directory are files:
 
-* `Dockerfile`, с его помощью можно собрать проект в Docker-контейнере без установки LaTeX на локальный компьютер
-* в `main.tex` подключаются все остальные файлы
-* с помощью `Makefile` можно собрать проект
-* файл `master-thesis.pdf` является результатом компиляции проекта
-* в `preamble.tex` задается преамбула
-* файл `.gitignore` содержит в себе временные файлы, которые не включаются в репозиторий
-* файл `.gitmodules` подключает к проекту репозиторий `vulncontrol`
+- `Dockerfile`, with its help you can build the project in a Docker container without installing LaTeX on your local computer
+- `main.tex` includes all other files
+- `Makefile` can be used to build the project
+- `master-thesis.pdf` is the result of project compilation
+- `preamble.tex` sets the preamble
+- `.gitignore` file contains temporary files that are not included in the repository
+- `.gitmodules` file connects the `vulncontrol` repository to the project
 
-В каталоге `extra/` находятся подключаемые PDF файлы, которые по каким-либо причинам не были сверстны в LaTeX.
+In the `extra/` directory are included PDF files that for some reason were not typeset in LaTeX.
 
-В каталоге `images/` находятся иллюстрации.
+In the `images/` directory are illustrations.
 
-В каталоге `inc/` находятся файлы, которые подключаются к `main.tex`:
+In the `inc/` directory are files that are included in `main.tex`:
 
-* файлы формата `0-*.tex` являются ненумерованными секциями (например введение, заключение, библиография)
-* файлы формата `[1-9]-*.tex` являются нумерованными секциями (например постановка задчи, обзор литературных источников и т.д)
-* файлы формата `[a-z]-app.tex` являются файлами приложений
+- files of format `0-*.tex` are unnumbered sections (e.g., introduction, conclusion, bibliography)
+- files of format `[1-9]-*.tex` are numbered sections (e.g., problem statement, literature review, etc.)
+- files of format `[a-z]-app.tex` are appendix files
 
-В каталоге `presentation/` находятся файлы необходимые для сборки слайдов презентации:
+In the `presentation/` directory are files necessary for building presentation slides:
 
-* `beamerthemeMasterThesis.sty` является файлом стиля презентации
-* в файле `main.tex` находится преамбула
-* `Makefile` необходим для сборки
-* `slides.tex` является файлом, содержащим текст презентации
-* `presentation.pdf` является результатом компиляции слайдов презентации
-* `report.md` содержит сопровождающий текст к слайдам презентации
+- `beamerthemeMasterThesis.sty` is the presentation style file
+- `main.tex` file contains the preamble
+- `Makefile` is necessary for building
+- `slides.tex` is the file containing the presentation text
+- `presentation.pdf` is the result of presentation slides compilation
+- `report.md` contains accompanying text for the presentation slides
 
-Каталог `vulncontrol/` является ссылкой на [репозиторий](https://github.com/Amet13/vulncontrol), содержащий исходный код скрипта для сбора данных по уязвимостям.
+The `vulncontrol/` directory is a link to the [repository](https://github.com/Amet13/vulncontrol) containing the source code of the script for collecting vulnerability data.
 
-## Работа с LaTeX
+## Working with LaTeX
 
-Установка нужных пакетов LaTeX в Ubuntu:
+Installing required LaTeX packages in Ubuntu:
 
 ```bash
 sudo apt install texlive-base texlive-latex-extra texlive-xetex texlive-lang-cyrillic latexmk texlive-fonts-extra texlive-science texlive-latex-recommended
 ```
 
-Для сборки проекта понадобится установка шрифтов Times New Roman, XITS Math, PT Sans, PT Mono, FreeMono:
+For building the project, installation of Times New Roman, XITS Math, PT Sans, PT Mono, FreeMono fonts is required:
 
 ```bash
 sudo apt install ttf-mscorefonts-installer fonts-freefont-ttf fontconfig
@@ -91,7 +93,7 @@ sudo unzip -o PTSansOFL.zip -d /usr/share/fonts/ && sudo unzip -o PTMonoOFL.zip 
 sudo rm -f {PTSansOFL,PTMonoOFL}.zip && sudo fc-cache -f -v
 ```
 
-Пример компиляции проекта с помощью Makefile:
+Example of project compilation using Makefile:
 
 ```bash
 git clone --recursive https://github.com/Amet13/master-thesis
@@ -99,13 +101,13 @@ cd master-thesis/
 make
 ```
 
-Пример очистки сборочных файлов после компиляции (кроме PDF):
+Example of cleaning build files after compilation (except PDF):
 
 ```bash
 make clean
 ```
 
-Пример сборки слайдов презентации:
+Example of building presentation slides:
 
 ```bash
 make pres
@@ -113,8 +115,8 @@ make pres
 
 ## Docker
 
-Проект можно собрать в Docker, в таком случае не придется устанавливать LaTeX.
-Docker уже должен быть установлен на сервере или локальном компьютере:
+The project can be built in Docker, in which case you won't need to install LaTeX.
+Docker should already be installed on the server or local computer:
 
 ```bash
 git clone --recursive https://github.com/Amet13/master-thesis
