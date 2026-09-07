@@ -5,14 +5,16 @@ on:
     branches: [main]
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   automerge:
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Fetch Dependabot metadata
         id: metadata
